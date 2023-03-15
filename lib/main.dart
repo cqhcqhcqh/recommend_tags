@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:recommend_tags/CaptionsWidget.dart';
-import 'package:recommend_tags/CoinsWidget.dart';
-import 'TagsNavigationBar.dart';
-import 'TagsRemoteAPI.dart';
-import 'SettingsWidget.dart';
-import 'CaptionsWidget.dart';
-import 'CoinsWidget.dart';
-import 'TagsWidget.dart';
+import 'Widget/SettingsWidget.dart';
+import 'Widget/CaptionsWidget.dart';
+import 'Widget/CoinsWidget.dart';
+import 'Widget/TagsWidget.dart';
+import 'NavigationBar/TagsNavigationBar.dart';
 
 void main() {
   runApp(const MyApp());

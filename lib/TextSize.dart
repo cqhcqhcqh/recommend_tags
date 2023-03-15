@@ -18,7 +18,3 @@ class FixedWidthText {
     return textPainter.size;
   }
 }
-
-class HashTags extends FixedWidthText {
-  HashTags({required super.text});
-}

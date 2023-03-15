@@ -1,5 +1,5 @@
-import 'HashTagsModel.dart';
-import 'HTTPClient.dart';
+import '../Models/HashTagsModel.dart';
+import '../Tools/HTTPClient.dart';
 
 class TagsRemoteAPI {
   Future<HashTags?> get(Uri uri) async {
