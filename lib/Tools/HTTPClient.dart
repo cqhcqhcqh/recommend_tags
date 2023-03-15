@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 final HttpClient httpClient = TagsHTTPClient('versa-ai.com');
 
 abstract class HttpClient {
-  Future<SimpleHTTPResponse> get(Uri uri) async {
+  Future<SimpleHTTPResponse> get(String path) async {
     throw (mustCallSuper);
   }
 }
@@ -15,9 +15,10 @@ class TagsHTTPClient<T> implements HttpClient {
   TagsHTTPClient(this.baseUrl) : dio = Dio(BaseOptions(baseUrl: baseUrl));
 
   @override
-  Future<SimpleHTTPResponse> get(Uri uri) async {
+  Future<SimpleHTTPResponse> get(String path) async {
     final Response<Map> response;
     try {
+      final uri = Uri(path: path);
       response = await dio.getUri(uri);
       return SimpleHTTPResponse(
           statusCode: response.statusCode, data: response.data);

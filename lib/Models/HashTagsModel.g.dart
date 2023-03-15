@@ -7,19 +7,21 @@ part of 'HashTagsModel.dart';
 // **************************************************************************
 
 HashTag _$HashTagFromJson(Map<String, dynamic> json) => HashTag(
-      tag: json['tag'] as String,
+      name: json['name'] as String,
     );
 
 Map<String, dynamic> _$HashTagToJson(HashTag instance) => <String, dynamic>{
-      'tag': instance.tag,
+      'name': instance.name,
     };
 
 HashTags _$HashTagsFromJson(Map<String, dynamic> json) => HashTags(
-      tags: (json['tags'] as List<dynamic>)
+      labels: (json['labels'] as List<dynamic>)
           .map((e) => HashTag.fromJson(e as Map<String, dynamic>))
           .toList(),
+      cost: json['cost'] as int,
     );
 
 Map<String, dynamic> _$HashTagsToJson(HashTags instance) => <String, dynamic>{
-      'tags': instance.tags,
+      'labels': instance.labels,
+      'cost': instance.cost,
     };
