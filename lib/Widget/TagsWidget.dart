@@ -1,6 +1,9 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:recommend_tags/Models/HashTagsModel.dart';
 import 'package:recommend_tags/RemoteAPI/TagsRemoteAPI.dart';
+import 'package:recommend_tags/main.dart';
 
 class TagsWidget extends StatefulWidget {
   const TagsWidget({super.key});
@@ -12,9 +15,6 @@ class TagsWidget extends StatefulWidget {
 
 class TagsStatefulState extends State<TagsWidget> {
   Widget? _buildSeparator(BuildContext context, int index) {
-    if (tags == null || tags!.isEmpty) {
-      return const Text("数据为空");
-    }
     final tag = tags![index];
     final Color divideColor = Theme.of(context).dividerColor;
     return DecoratedBox(
@@ -24,17 +24,22 @@ class TagsStatefulState extends State<TagsWidget> {
           bottom: Divider.createBorderSide(context, color: divideColor),
         ),
       ),
-      child: ListTile(
-          title: Text(tag.allLabels()), subtitle: Text('subtitle $index')),
+      child:
+          ListTile(title: Text(tag.content), subtitle: Text('subtitle $index')),
     );
   }
 
-  late final List<HashTags>? tags;
-  final remoteAPI = TagsRemoteAPI();
+  List<HashTags>? tags;
   @override
   void initState() {
     super.initState();
+    tags = remoteAPI.cached;
     requestTags();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   void requestTags() async {
@@ -42,16 +47,26 @@ class TagsStatefulState extends State<TagsWidget> {
     if (tags != null) {
       this.tags = tags;
     }
+    if (!mounted) {
+      return;
+    }
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    const itemCount = 20;
+    final count = itemCount();
+    if (count == 0) {
+      return const Text("数据为空");
+    }
     const itemExtent = 70.0;
     return ListView.builder(
-        itemCount: itemCount,
-        itemExtent: itemExtent,
-        itemBuilder: _buildSeparator);
+        itemCount: count, itemExtent: itemExtent, itemBuilder: _buildSeparator);
   }
+
+  int itemCount() {
+    return tags?.length ?? 0;
+  }
+
+  TagsRemoteAPI get remoteAPI => MyApp.container.tagsAPI;
 }

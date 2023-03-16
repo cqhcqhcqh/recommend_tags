@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recommend_tags/RemoteAPI/TagsRemoteAPI.dart';
 
 // ignore: empty_constructor_bodies
 class TagsNavigationBar extends BottomNavigationBar {
@@ -10,4 +11,8 @@ class TagsNavigationBar extends BottomNavigationBar {
       super.currentIndex = 1,
       // super.type = BottomNavigationBarType.fixed,
       super.onTap});
+}
+
+class NavigationBarDependencyContainer {
+  final tagsAPI = TagsRemoteAPI();
 }

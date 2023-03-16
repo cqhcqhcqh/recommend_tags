@@ -20,8 +20,3 @@ HashTags _$HashTagsFromJson(Map<String, dynamic> json) => HashTags(
           .toList(),
       cost: json['cost'] as int,
     );
-
-Map<String, dynamic> _$HashTagsToJson(HashTags instance) => <String, dynamic>{
-      'labels': instance.labels,
-      'cost': instance.cost,
-    };

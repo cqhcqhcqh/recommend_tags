@@ -7,7 +7,7 @@ import '../Models/CoinsModel.dart';
 class TagsRemoteAPI {
   Future<CoinsModel?> get() async {
     final String path = '/home/coins';
-    await Future<Void>.delayed(Duration(seconds: 3));
+    await Future.delayed(Duration(seconds: 3));
     return CoinsModel.fromJson(coins);
     final response = await httpClient.get(path);
     if (response.data == null) {

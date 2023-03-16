@@ -23,15 +23,14 @@ class HashTag {
 
 @JsonSerializable()
 class HashTags {
-  final List<HashTag> labels;
   final int cost;
-  HashTags({required this.labels, required this.cost});
-  Map<String, dynamic> toJson() => _$HashTagsToJson(this);
+  final String _names;
+  String get content => _names;
+  HashTags({required List<HashTag> labels, required this.cost})
+      : _names = labels.map((e) => "#${e.name}").toList().join(", ");
+
   factory HashTags.fromJson(Map<String, dynamic> json) =>
       _$HashTagsFromJson(json);
-  String allLabels() {
-    return labels.map((e) => "#${e.name}").toList().join(", ");
-  }
 }
 
 List<HashTags> allHashTagsFromJson(Map<String, dynamic> json) =>
