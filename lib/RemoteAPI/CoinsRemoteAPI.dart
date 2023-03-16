@@ -4,11 +4,15 @@ import '../Models/HashTagsModel.dart';
 import '../Tools/HTTPClient.dart';
 import '../Models/CoinsModel.dart';
 
-class TagsRemoteAPI {
+class CoinsRemoteAPI {
+  CoinsModel? _cached;
+  CoinsModel? get cached => _cached;
+
   Future<CoinsModel?> get() async {
     final String path = '/home/coins';
     await Future.delayed(Duration(seconds: 3));
-    return CoinsModel.fromJson(coins);
+    _cached = CoinsModel.fromJson(coins);
+    return _cached;
     final response = await httpClient.get(path);
     if (response.data == null) {
       return null;
@@ -18,7 +22,7 @@ class TagsRemoteAPI {
 }
 
 final Map<String, dynamic> coins = {
-  'cates': [
+  'coins': [
     {
       'coin': 100,
       'prices': '\$0.99',

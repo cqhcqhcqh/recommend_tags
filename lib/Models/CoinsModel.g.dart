@@ -18,8 +18,8 @@ Map<String, dynamic> _$CoinsModelToJson(CoinsModel instance) =>
     };
 
 CoinModel _$CoinModelFromJson(Map<String, dynamic> json) => CoinModel(
-      price: (json['price'] as num).toDouble(),
-    );
+    price: (json['price'] as num).toDouble(),
+    coin: (json['coin'] as num).toDouble());
 
 Map<String, dynamic> _$CoinModelToJson(CoinModel instance) => <String, dynamic>{
       'price': instance.price,

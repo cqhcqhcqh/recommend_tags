@@ -13,7 +13,8 @@ class CoinsModel {
 @JsonSerializable()
 class CoinModel {
   final double price;
-  CoinModel({required this.price});
+  final double coin;
+  CoinModel({required this.price, required this.coin});
   Map<String, dynamic> toJson() => _$CoinModelToJson(this);
   factory CoinModel.fromJson(Map<String, dynamic> json) =>
       _$CoinModelFromJson(json);

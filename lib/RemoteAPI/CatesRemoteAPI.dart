@@ -5,10 +5,14 @@ import '../Tools/HTTPClient.dart';
 import '../Models/TagCatesModel.dart';
 
 class CatesRemoteAPI {
-  Future<TagCates?> get(Uri uri) async {
+  TagCates? _cached;
+  TagCates? get cached => _cached;
+
+  Future<TagCates?> get() async {
     final String path = '/home/coins';
     await Future.delayed(Duration(seconds: 3));
-    return TagCates.fromJson(cates);
+    _cached = TagCates.fromJson(cates);
+    return _cached;
     final response = await httpClient.get(path);
     if (response.data == null) {
       return null;
