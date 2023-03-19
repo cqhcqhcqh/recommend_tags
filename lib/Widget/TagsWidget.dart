@@ -16,7 +16,26 @@ class TagsWidget extends StatefulWidget {
 class TagsStatefulState extends State<TagsWidget> {
   Widget? _buildSeparator(BuildContext context, int index) {
     final tag = tags![index];
+    const shadow = BoxShadow(
+        color: Colors.purple,
+        // offset: Offset(5, 5),
+        spreadRadius: 2,
+        blurRadius: 5,
+        blurStyle: BlurStyle.normal);
     final Color divideColor = Theme.of(context).dividerColor;
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: const [shadow],
+        color: Colors.green,
+        border: Border.all(width: 1, color: Colors.red),
+        borderRadius: const BorderRadius.vertical(
+            top: Radius.circular(10), bottom: Radius.circular(5)),
+      ),
+      padding: const EdgeInsets.all(30),
+      margin: const EdgeInsets.all(20),
+      child:
+          ListTile(title: Text(tag.content), subtitle: Text('subtitle $index')),
+    );
     return DecoratedBox(
       position: DecorationPosition.foreground,
       decoration: BoxDecoration(
@@ -59,9 +78,8 @@ class TagsStatefulState extends State<TagsWidget> {
     if (count == 0) {
       return const Text("数据为空");
     }
-    const itemExtent = 70.0;
-    return ListView.builder(
-        itemCount: count, itemExtent: itemExtent, itemBuilder: _buildSeparator);
+    // const itemExtent = 70.0;
+    return ListView.builder(itemCount: count, itemBuilder: _buildSeparator);
   }
 
   int itemCount() {
