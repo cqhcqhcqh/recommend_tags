@@ -1,12 +1,10 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:recommend_tags/Models/HashTagsModel.dart';
 import 'package:recommend_tags/RemoteAPI/TagsRemoteAPI.dart';
-import 'package:recommend_tags/main.dart';
 
 class TagsWidget extends StatefulWidget {
-  const TagsWidget({super.key});
+  final TagsRemoteAPI remoteAPI;
+  const TagsWidget({super.key, required this.remoteAPI});
   @override
   State<TagsWidget> createState() {
     return TagsStatefulState();
@@ -33,16 +31,6 @@ class TagsStatefulState extends State<TagsWidget> {
       ),
       padding: const EdgeInsets.all(30),
       margin: const EdgeInsets.all(20),
-      child:
-          ListTile(title: Text(tag.content), subtitle: Text('subtitle $index')),
-    );
-    return DecoratedBox(
-      position: DecorationPosition.foreground,
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: Divider.createBorderSide(context, color: divideColor),
-        ),
-      ),
       child:
           ListTile(title: Text(tag.content), subtitle: Text('subtitle $index')),
     );
@@ -86,5 +74,5 @@ class TagsStatefulState extends State<TagsWidget> {
     return tags?.length ?? 0;
   }
 
-  TagsRemoteAPI get remoteAPI => MyApp.container.tagsAPI;
+  TagsRemoteAPI get remoteAPI => widget.remoteAPI;
 }

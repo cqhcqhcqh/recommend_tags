@@ -4,7 +4,8 @@ import 'package:recommend_tags/RemoteAPI/CoinsRemoteAPI.dart';
 import 'package:recommend_tags/main.dart';
 
 class CoinsWidget extends StatefulWidget {
-  const CoinsWidget({super.key});
+  final CoinsRemoteAPI remoteAPI;
+  const CoinsWidget({super.key, required this.remoteAPI});
   @override
   State<CoinsWidget> createState() {
     return CoinsStatefulState();
@@ -38,7 +39,7 @@ class CoinsStatefulState extends State<CoinsWidget> {
           bottom: Divider.createBorderSide(context, color: divideColor),
         ),
       ),
-      child: ListTile(title: Text('${coin.price}'), subtitle: Text('coi')),
+      child: ListTile(title: Text('${coin.price}'), subtitle: Text('${coin.price}')),
     );
   }
 
@@ -53,5 +54,5 @@ class CoinsStatefulState extends State<CoinsWidget> {
             title: Text("title $index"), subtitle: Text("body $index")));
   }
 
-  CoinsRemoteAPI get remoteAPI => MyApp.container.coinsAPI;
+  CoinsRemoteAPI get remoteAPI => widget.remoteAPI;
 }

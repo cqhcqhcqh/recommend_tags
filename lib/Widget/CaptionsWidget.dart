@@ -4,7 +4,8 @@ import 'package:recommend_tags/Models/TagCatesModel.dart';
 import 'package:recommend_tags/RemoteAPI/CatesRemoteAPI.dart';
 
 class CaptionsWidget extends StatefulWidget {
-  const CaptionsWidget({super.key});
+  final CatesRemoteAPI remoteAPI;
+  const CaptionsWidget({super.key, required this.remoteAPI});
   @override
   State<CaptionsWidget> createState() {
     return CaptionsStatefulState();
@@ -44,5 +45,5 @@ class CaptionsStatefulState extends State<CaptionsWidget> {
     setState(() {});
   }
 
-  CatesRemoteAPI get remoteAPI => MyApp.container.catesAPI;
+  CatesRemoteAPI get remoteAPI => widget.remoteAPI;
 }

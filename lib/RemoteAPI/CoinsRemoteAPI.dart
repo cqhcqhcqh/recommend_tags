@@ -25,7 +25,7 @@ final Map<String, dynamic> coins = {
   'coins': [
     {
       'coin': 100,
-      'prices': '\$0.99',
+      'price': '\$0.99',
     },
     {
       'coin': 300,
