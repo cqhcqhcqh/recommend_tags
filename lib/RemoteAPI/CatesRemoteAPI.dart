@@ -1,6 +1,4 @@
-import 'dart:ffi';
 
-import '../Models/HashTagsModel.dart';
 import '../Tools/HTTPClient.dart';
 import '../Models/TagCatesModel.dart';
 
