@@ -1,38 +1,72 @@
+import 'dart:convert';
+import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:recommend_tags/RemoteAPI/CatesRemoteAPI.dart';
+import '../Models/CoinsModel.dart';
+import '../Models/HashTagsModel.dart';
+import '../Models/TagCatesModel.dart';
 
 final HttpClient httpClient = TagsHTTPClient('versa-ai.com');
 
 abstract class HttpClient {
-  Future<SimpleHTTPResponse> get(String path) async {
+  Future<T> get<T extends SimpleHTTPResponse>(String path) async {
     throw (mustCallSuper);
   }
 }
 
-class TagsHTTPClient<T> implements HttpClient {
+class TagsHTTPClient implements HttpClient {
   final Dio dio;
   final String baseUrl;
   TagsHTTPClient(this.baseUrl) : dio = Dio(BaseOptions(baseUrl: baseUrl));
 
   @override
-  Future<SimpleHTTPResponse> get(String path) async {
+  Future<T> get<T extends SimpleHTTPResponse>(String path) async {
     final Response<Map> response;
     try {
       final uri = Uri(path: path);
       response = await dio.getUri(uri);
-      return SimpleHTTPResponse(
-          statusCode: response.statusCode, data: response.data);
+      return SimpleHTTPResponse<T>.from(response) as T;
     } on DioError catch (e) {
-      return SimpleHTTPResponse(error: e);
+      return SimpleHTTPResponse(error: e) as T;
     } finally {}
   }
 }
 
-class SimpleHTTPResponse {
+class SimpleHTTPResponse<T> {
   final Exception? error;
-  final int? statusCode;
+  int? statusCode;
   final Map? data;
   SimpleHTTPResponse({this.error, this.statusCode, this.data});
+
+  /// Factory constructors
+  /// 用法 1
+  /// `Use the factory keyword when implementing a constructor that doesn’t always create a new instance of its class`
+  /// 用法 2
+  /// Another use case for factory constructors is initializing a final variable using logic that can’t be handled in the initializer list
+  /// 工厂构造，用来方便构造可能不是这个 SimpleHTTPResponse 类型的实例（子类/或者是缓存的实例）
+  /// 或者构造不方便（初始化列表 eg. 22 行给 final dio 赋值，如果 options 中的其他参数不需要存储在 `TagsHTTPClient` 的时候）在初始列表中构造的 final variable 属性
+  /// 就可以通过工厂构造来构造属性参数
+  factory SimpleHTTPResponse.from(Response<Map> response) {
+    final map = {'data': Null};
+    final json = (response.data ?? map) as Map<String, dynamic>;
+    if (T is CoinsModel) {
+      final coins = CoinsModel.fromJson(json);
+      coins.statusCode = response.statusCode;
+      return coins as SimpleHTTPResponse<T>;
+    } else if (T is HashTags) {
+      final tags = HashTags.fromJson(json) ;
+      tags.statusCode = response.statusCode;
+      return tags as SimpleHTTPResponse<T>;
+    } else if (T is TagCates) {
+      final cates = TagCates.fromJson(json) ;
+      cates.statusCode = response.statusCode;
+      return cates as SimpleHTTPResponse<T>;
+    } else {
+      throw NotNullableError;
+    }
+  }  
 }
 
   // 1.

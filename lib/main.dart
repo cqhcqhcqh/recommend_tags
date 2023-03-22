@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:recommend_tags/RemoteAPI/CatesRemoteAPI.dart';
-import 'package:recommend_tags/RemoteAPI/CoinsRemoteAPI.dart';
-import 'package:recommend_tags/RemoteAPI/TagsRemoteAPI.dart';
-import 'package:recommend_tags/common/theme.dart';
+import 'package:provider/provider.dart';
+import 'RemoteAPI/CatesRemoteAPI.dart';
+import 'RemoteAPI/CoinsRemoteAPI.dart';
+import 'RemoteAPI/TagsRemoteAPI.dart';
+import 'common/theme.dart';
 import 'Widget/SettingsWidget.dart';
 import 'Widget/CaptionsWidget.dart';
 import 'Widget/CoinsWidget.dart';
 import 'Widget/TagsWidget.dart';
 import 'NavigationBar/TagsNavigationBar.dart';
 import 'Widget/NavigationBarBuilder.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -56,8 +56,11 @@ class TarbarWidget extends StatelessWidget {
       appBar: AppBar(
         title: const Text("app bar title"),
       ),
-      body: Center(child: Consumer<NavigationBarBuilder>(builder: (context, value, child) => _widgetOptions[value.selectedIndex],)),
-      bottomNavigationBar: Consumer<NavigationBarBuilder>(builder: (context, value, child) => TagsNavigationBar(
+      body: Center(
+        child: Consumer<NavigationBarBuilder>(
+          builder: (context, value, child) => _widgetOptions[value.selectedIndex],)),
+      bottomNavigationBar: Consumer<NavigationBarBuilder>(
+        builder: (context, value, child) => TagsNavigationBar(
         items: items,
         currentIndex: value.selectedIndex,
         onTap: value.updateSelectedIndex,

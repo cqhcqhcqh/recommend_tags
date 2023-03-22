@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:recommend_tags/Tools/HTTPClient.dart';
 part 'HashTagsModel.g.dart';
 
 @JsonSerializable()
@@ -19,7 +20,7 @@ class HashTag {
 //     };
 
 @JsonSerializable()
-class HashTags {
+class HashTags extends SimpleHTTPResponse {
   final int cost;
   final String _names;
   String get content => _names;
