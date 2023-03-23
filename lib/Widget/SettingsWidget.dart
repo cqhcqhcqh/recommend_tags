@@ -9,10 +9,7 @@ class AppSettingsWidget extends StatefulWidget {
   }
 }
 
-class AppSettingsWidgetState extends State<AppSettingsWidget> with AutomaticKeepAliveClientMixin {
-  @override
-  bool get wantKeepAlive => true;
-  
+class AppSettingsWidgetState extends State<AppSettingsWidget> {
   void _cleanCache() {
     setState(() {
       _cache = "0.0 M";

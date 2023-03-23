@@ -37,8 +37,7 @@ class TarbarWidget extends StatelessWidget {
     CaptionsWidget(remoteAPI: CatesRemoteAPI(),),
     CoinsWidget(remoteAPI: CoinsRemoteAPI(),),
     const AppSettingsWidget(),
-    ]
-  );
+  ];
 
   final List<BottomNavigationBarItem> items = [
       const BottomNavigationBarItem(
@@ -59,13 +58,21 @@ class TarbarWidget extends StatelessWidget {
       ),
       body: Center(
         child: Consumer<NavigationBarBuilder>(
-          builder: (context, value, child) => IndexedStack(index: value.selectedIndex, children: [],),)),
+          /// https://api.flutter.dev/flutter/widgets/IndexedStack-class.html
+          /// IndexedStack sample use
+          builder: (context, value, child) => IndexedStack(
+            index: value.selectedIndex,
+            children: _widgetOptions,
+            ),
+        )
+      ),
       bottomNavigationBar: Consumer<NavigationBarBuilder>(
         builder: (context, value, child) => TagsNavigationBar(
-        items: items,
-        currentIndex: value.selectedIndex,
-        onTap: value.updateSelectedIndex,
-      )),
+          items: items,
+          currentIndex: value.selectedIndex,
+          onTap: value.updateSelectedIndex,
+        )
+      ),
     );
   }
 }

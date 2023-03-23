@@ -11,10 +11,7 @@ class CoinsWidget extends StatefulWidget {
   }
 }
 
-class CoinsStatefulState extends State<CoinsWidget> with AutomaticKeepAliveClientMixin {
-  @override
-  bool get wantKeepAlive => true;
-  
+class CoinsStatefulState extends State<CoinsWidget> {
   CoinsModel? coins;
   @override
   void initState() {
