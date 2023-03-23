@@ -1,9 +1,5 @@
-import 'dart:convert';
-import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
-import 'package:json_annotation/json_annotation.dart';
-import 'package:recommend_tags/RemoteAPI/CatesRemoteAPI.dart';
 import '../Models/CoinsModel.dart';
 import '../Models/HashTagsModel.dart';
 import '../Models/TagCatesModel.dart';

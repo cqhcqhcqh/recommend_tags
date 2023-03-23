@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recommend_tags/Models/CoinsModel.dart';
 import 'package:recommend_tags/RemoteAPI/CoinsRemoteAPI.dart';
-import 'package:recommend_tags/main.dart';
 
 class CoinsWidget extends StatefulWidget {
   final CoinsRemoteAPI remoteAPI;
@@ -12,7 +11,10 @@ class CoinsWidget extends StatefulWidget {
   }
 }
 
-class CoinsStatefulState extends State<CoinsWidget> {
+class CoinsStatefulState extends State<CoinsWidget> with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+  
   CoinsModel? coins;
   @override
   void initState() {

@@ -1,8 +1,9 @@
-// import 'package:json_annotation/json_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
+import '../Tools/HTTPClient.dart';
 part 'TagCatesModel.g.dart';
 
 @JsonSerializable()
-class TagCates {
+class TagCates extends SimpleHTTPResponse {
   final List<TagCate> cates;
   TagCates({required this.cates});
   Map<String, dynamic> toJson() => _$TagCatesToJson(this);

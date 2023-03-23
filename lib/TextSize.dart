@@ -10,6 +10,7 @@ class FixedWidthText {
       : size = _textSize(text, style);
   // Here it is!
   static Size _textSize(String text, TextStyle style) {
+    Column
     final TextPainter textPainter = TextPainter(
         text: TextSpan(text: text, style: style),
         maxLines: 1,

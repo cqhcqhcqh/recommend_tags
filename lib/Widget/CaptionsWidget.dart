@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:recommend_tags/main.dart';
 import 'package:recommend_tags/Models/TagCatesModel.dart';
 import 'package:recommend_tags/RemoteAPI/CatesRemoteAPI.dart';
 

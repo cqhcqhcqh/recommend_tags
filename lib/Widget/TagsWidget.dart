@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:recommend_tags/Models/HashTagsModel.dart';
 import 'package:recommend_tags/RemoteAPI/TagsRemoteAPI.dart';
 
-class TagsWidget extends StatefulWidget {
+class TagsWidget extends StatefulWidget with AutomaticKeepAliveClientMixin {
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
+  
   final TagsRemoteAPI remoteAPI;
   const TagsWidget({super.key, required this.remoteAPI});
   @override

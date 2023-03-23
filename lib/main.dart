@@ -37,7 +37,8 @@ class TarbarWidget extends StatelessWidget {
     CaptionsWidget(remoteAPI: CatesRemoteAPI(),),
     CoinsWidget(remoteAPI: CoinsRemoteAPI(),),
     const AppSettingsWidget(),
-  ];
+    ]
+  );
 
   final List<BottomNavigationBarItem> items = [
       const BottomNavigationBarItem(
@@ -58,7 +59,7 @@ class TarbarWidget extends StatelessWidget {
       ),
       body: Center(
         child: Consumer<NavigationBarBuilder>(
-          builder: (context, value, child) => _widgetOptions[value.selectedIndex],)),
+          builder: (context, value, child) => IndexedStack(index: value.selectedIndex, children: [],),)),
       bottomNavigationBar: Consumer<NavigationBarBuilder>(
         builder: (context, value, child) => TagsNavigationBar(
         items: items,

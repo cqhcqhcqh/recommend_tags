@@ -1,8 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
+import '../Tools/HTTPClient.dart';
 part 'CoinsModel.g.dart';
 
 @JsonSerializable()
-class CoinsModel {
+class CoinsModel extends SimpleHTTPResponse {
   final List<CoinModel> coins;
   CoinsModel({required this.coins});
   Map<String, dynamic> toJson() => _$CoinsModelToJson(this);
